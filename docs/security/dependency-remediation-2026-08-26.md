@@ -24,8 +24,8 @@
 - **Distinct Advisories**: 46 advisories
 - **Severity Breakdown**:
   - Critical: 1 (`mtdowling/jmespath.php`)
-  - High: 9 (`filament/filament` [3], `guzzlehttp/guzzle` [1], `laravel/framework` [1], `league/commonmark` [4], `symfony/http-kernel` [1], `symfony/mime` [1])
-  - Medium: 30 (`filament/actions` [1], `filament/infolists` [1], `filament/tables` [1], `guzzlehttp/guzzle` [8], `guzzlehttp/psr7` [4], `laravel/framework` [1], `league/commonmark` [2], `phpseclib/phpseclib` [1], `symfony/html-sanitizer` [4], `symfony/http-foundation` [1], `symfony/mailer` [1], `symfony/mime` [1], `symfony/routing` [2])
+  - High: 9 (`filament/filament` [1], `guzzlehttp/guzzle` [1], `laravel/framework` [1], `league/commonmark` [4], `symfony/http-kernel` [1], `symfony/mime` [1])
+  - Medium: 30 (`filament/actions` [1], `filament/filament` [2], `filament/infolists` [1], `filament/tables` [1], `guzzlehttp/guzzle` [8], `guzzlehttp/psr7` [4], `laravel/framework` [1], `league/commonmark` [2], `phpseclib/phpseclib` [1], `symfony/html-sanitizer` [4], `symfony/http-foundation` [1], `symfony/mailer` [1], `symfony/mime` [1], `symfony/routing` [2])
   - Low: 5 (`symfony/html-sanitizer` [1], `symfony/polyfill-intl-idn` [1], `symfony/yaml` [3])
   - Untyped: 1 (`laravel/framework` [1])
 - **Abandoned Packages**: 0

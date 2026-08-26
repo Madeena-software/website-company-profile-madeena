@@ -2,7 +2,7 @@
 
 ## Release Security Disposition
 
-> **Remediation status**: The vulnerable lock inventory documented by this audit was remediated in Task #10B. See [dependency-remediation-2026-08-26.md](file:///var/www/madeena-website-company-profile/docs/security/dependency-remediation-2026-08-26.md).
+> **Remediation status**: The vulnerable lock inventory documented by this audit was remediated in Task #10B. See [dependency-remediation-2026-08-26.md](dependency-remediation-2026-08-26.md).
 
 **CLEAR — NO DEPENDENCY SECURITY BLOCKER IDENTIFIED**
 
