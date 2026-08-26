@@ -576,9 +576,54 @@ class EventFeedbackTest extends TestCase
         $response->assertSee('Navigasi');
         $response->assertSee('Kontak');
         $response->assertSee('Seluruh hak dilindungi.');
-        $response->assertSee('Kesan dan Pesan Anda untuk Booth Madeena');
-        $response->assertSee('Form Feedback Booth Madeena');
+        $response->assertSee('Kesan dan Pesan untuk '.$this->event->name);
+        $response->assertSee('Form Feedback');
         $response->assertDontSee('data-testid="language-switcher-desktop"', false);
         $response->assertDontSee('data-testid="language-switcher-mobile"', false);
+    }
+
+    public function test_feedback_page_renders_event_specific_identity_and_does_not_leak_legacy_inabuyer_presentation(): void
+    {
+        $customEvent = Event::create([
+            'name' => 'Rumah Skrining Prestige',
+            'slug' => 'rumah-skrining-prestige',
+            'is_active' => true,
+        ]);
+
+        $response = $this->get(route('events.feedback', ['event' => $customEvent->slug]));
+
+        $response->assertOk();
+        $response->assertSee('Rumah Skrining Prestige');
+        $response->assertSee('Feedback — Rumah Skrining Prestige');
+        $response->assertSee('Kesan dan Pesan untuk Rumah Skrining Prestige');
+        $response->assertSee('Ceritakan pengalaman, masukan, atau harapan Anda untuk Rumah Skrining Prestige');
+        $response->assertSee('Form Feedback');
+        $response->assertSee('Kirim Feedback');
+        $response->assertSee(route('events.feedback.store', ['event' => $customEvent->slug]), false);
+        $response->assertSee(route('events.feedback.csrf-token', ['event' => $customEvent->slug]), false);
+
+        // Ensure legacy Inabuyer presentation is not leaked
+        $response->assertDontSee('Inabuyer 2026');
+        $response->assertDontSee('Booth Madeena Inabuyer 2026');
+        $response->assertDontSee('https://bit.ly/madeenafeedback');
+        $response->assertDontSee('qr_Kesan dan Pesan Booth Madeena Inabuyer 2026.png');
+    }
+
+    public function test_feedback_page_renders_legacy_inabuyer_event_via_model_name(): void
+    {
+        $inabuyerEvent = Event::create([
+            'name' => 'Inabuyer 2026',
+            'slug' => 'inabuyer-2026-event',
+            'is_active' => true,
+        ]);
+
+        $response = $this->get(route('events.feedback', ['event' => $inabuyerEvent->slug]));
+
+        $response->assertOk();
+        $response->assertSee('Inabuyer 2026');
+        $response->assertSee('Feedback — Inabuyer 2026');
+        $response->assertSee('Kesan dan Pesan untuk Inabuyer 2026');
+        $response->assertSee('Ceritakan pengalaman, masukan, atau harapan Anda untuk Inabuyer 2026');
+        $response->assertSee('Kirim Feedback');
     }
 }

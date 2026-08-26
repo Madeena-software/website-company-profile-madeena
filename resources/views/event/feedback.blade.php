@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Kesan dan Pesan Booth Madeena Inabuyer 2026')
-@section('description', 'Sampaikan kesan dan pesan Anda untuk booth Madeena di Inabuyer 2026 melalui formulir mobile-friendly Madeena.')
+@section('title', 'Feedback — ' . $event->name)
+@section('description', 'Sampaikan kesan dan pesan Anda untuk ' . $event->name . ' melalui formulir mobile-friendly Madeena.')
 
 @section('content')
     <section
@@ -14,20 +14,20 @@
                             class="h-11 w-auto rounded bg-white p-1.5 sm:h-12">
                         <div>
                             <p class="text-xs font-semibold uppercase tracking-wide text-madeena-teal">Madeena</p>
-                            <p class="text-sm font-semibold text-white/85">Inabuyer 2026 Feedback</p>
+                            <p class="text-sm font-semibold text-white/85">{{ $event->name }}</p>
                         </div>
                     </div>
 
                     <div class="mt-8 max-w-xl space-y-4">
                         <p
                             class="inline-flex rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-sm font-semibold text-white/90">
-                            Booth Madeena Inabuyer 2026
+                            {{ $event->name }}
                         </p>
                         <h1 class="text-3xl font-black leading-tight text-white sm:text-4xl lg:text-5xl">
-                            Kesan dan Pesan Anda untuk Booth Madeena
+                            Kesan dan Pesan untuk {{ $event->name }}
                         </h1>
                         <p class="text-base leading-7 text-white/75 sm:text-lg">
-                            Masukan Anda membantu kami menyempurnakan pengalaman booth, produk, dan layanan Madeena untuk
+                            Masukan Anda membantu kami menyempurnakan pengalaman, produk, dan layanan Madeena untuk
                             kolaborasi berikutnya.
                         </p>
                     </div>
@@ -59,8 +59,7 @@
 
             <div class="rounded-lg border border-slate-200 bg-white p-4 shadow-xl shadow-slate-900/10 sm:p-6 lg:p-8">
                 <div class="mb-6 border-b border-slate-200 pb-5">
-                    <p class="text-sm font-semibold uppercase tracking-wide text-madeena-teal">Form Feedback Booth Madeena
-                    </p>
+                    <p class="text-sm font-semibold uppercase tracking-wide text-madeena-teal">Form Feedback</p>
                     <h2 class="mt-2 text-2xl font-black text-slate-950 sm:text-3xl">Bagikan kesan dan pesan Anda</h2>
                     <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
                         Tips: gunakan input suara untuk memudahkan dalam pengisian.
@@ -166,7 +165,7 @@
                             <textarea id="kesan_dan_pesan" name="kesan_dan_pesan" rows="7" required maxlength="5000"
                                 autocomplete="off" autocapitalize="sentences" spellcheck="true" enterkeyhint="done"
                                 class="w-full rounded-lg border-slate-300 bg-white px-4 py-3 text-base leading-7 text-slate-900 shadow-sm transition placeholder:text-slate-400 focus:border-madeena-teal focus:ring-madeena-teal/20"
-                                placeholder="Ceritakan pengalaman, masukan, atau harapan Anda untuk Booth Madeena di Inabuyer 2026">{{ old('kesan_dan_pesan') }}</textarea>
+                                placeholder="Ceritakan pengalaman, masukan, atau harapan Anda untuk {{ $event->name }}">{{ old('kesan_dan_pesan') }}</textarea>
                             @error('kesan_dan_pesan')
                                 <p class="mt-2 text-sm font-medium text-rose-600">{{ $message }}</p>
                             @enderror
@@ -177,7 +176,7 @@
                     <button type="submit"
                         class="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-madeena-blue px-6 py-3 text-base font-bold text-white shadow-lg shadow-madeena-blue/20 transition hover:bg-madeena-blue/95 focus:outline-none focus:ring-4 focus:ring-madeena-blue/20">
                         <i class="fas fa-paper-plane text-sm" aria-hidden="true"></i>
-                        <span>Kirim ke Booth Madeena</span>
+                        <span>Kirim Feedback</span>
                     </button>
                 </form>
             </div>
