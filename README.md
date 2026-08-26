@@ -2,7 +2,7 @@
 
 Company profile website for **PT Madeena Karya Indonesia**, an Indonesian manufacturer of Digital Direct Radiography (DDR) equipment based on Camera Coupled X-Ray Detector (CCXD) technology.
 
-> 📄 For full product requirements, data model, and architecture details, see [`docs/PRD.md`](docs/PRD.md).
+> 📄 For full product requirements, data model, and architecture details, see [`docs/PRD.md`](docs/PRD.md). For CMS operator guidance in Indonesian, see [`docs/panduan-cms/panduan-cms.md`](docs/panduan-cms/panduan-cms.md).
 
 ## Tech Stack
 
@@ -10,21 +10,21 @@ Company profile website for **PT Madeena Karya Indonesia**, an Indonesian manufa
 |---|---|---|
 | Backend | Laravel (PHP) | 13.x / 8.4 |
 | Admin Panel | Filament PHP | 5.x |
-| Frontend | Tailwind CSS + Alpine.js | 3.4 / 3.15 |
+| Frontend | Tailwind CSS + Alpine.js | 4.0 / 3.15 |
 | Build Tool | Vite | 6.x |
 | Database | MySQL | 8.4 |
 | Production Server | Nginx + PHP-FPM | Alpine |
 | Container | Docker + Docker Swarm | Multi-stage |
 | Object Storage | MinIO (S3-compatible) | — |
-| CI/CD | GitHub Actions | 8 workflows |
+| CI/CD | GitHub Actions | Workflows |
 
 ## Features
 
-- **Public Website** — Homepage with hero banners, product catalog, blog, company profile, certifications, and contact section with WhatsApp integration
-- **Admin Panel** (`/admin`) — Filament v5 CMS for managing hero banners, products, blog posts, pages, site settings, and user accounts
-- **Inabuyer 2026 Module** — Event feedback form with CSRF protection and a Livewire-based real-time display for exhibition screens
-- **Object Storage** — MinIO S3-compatible storage for media uploads and database backups
-- **Automated Backups** — Database backup upload to S3 with integrity verification and retention pruning
+- **Public Website** — Homepage with dynamic sections, multilingual support via dynamic Language registry, product catalog (`/produk/{slug}`), academic research articles (`/artikel/{slug}`), custom pages (`/halaman/{slug}`), and contact section with WhatsApp integration.
+- **Admin Panel** (`/admin`) — Filament v5 CMS for managing Homepage sections (draft/published & language duplication), Language registry & UI labels, Products, Articles (academic rich editor with KaTeX), Pages (draft/publication lifecycle & preview), Events, Guest Messages, Site Settings, and User accounts.
+- **Event & Guest Message Module** — Public feedback form (`/events/{event:slug}/feedback`) with CSRF protection, rate limiting, anti-spam honeypot, duplicate suppression, and a Livewire real-time display (`/events/{event:slug}/display`) for exhibition screens (with legacy redirects from `/inabuyer2026/...`).
+- **Object Storage** — MinIO S3-compatible storage for media uploads and database backups.
+- **Automated Backups** — Database backup upload to S3 with integrity verification and retention pruning.
 
 ## Quick Start
 
@@ -53,11 +53,11 @@ php artisan storage:link
 composer dev
 ```
 
-The `composer dev` command starts all services concurrently: app server (port 8000), queue worker, log tail, and Vite HMR.
+The `composer dev` command starts all services concurrently: app server (port 8011), queue worker, log tail, and Vite HMR.
 
 ## Admin Access
 
-Navigate to `/admin` and log in. You can log in using Madeena IAM SSO or traditional credentials. The database seeder creates a default admin account using the `FILAMENT_ADMIN_EMAIL` and `FILAMENT_ADMIN_PASSWORD` values from `.env`.
+Navigate to `/admin` and log in. You can log in using Madeena IAM SSO or local credentials. The database seeder creates a default admin account using the `FILAMENT_ADMIN_EMAIL` and `FILAMENT_ADMIN_PASSWORD` values from `.env`.
 
 ## Docker
 
@@ -67,24 +67,33 @@ docker compose up -d
 
 # Production simulation
 docker compose -f docker-compose.simulation.yml up -d
-
-# Production deployment (Swarm)
-docker stack deploy -c docker-compose.prod.yml madeena_cp
 ```
 
-## Testing
+> ℹ️ Production deployments are managed via a repository-controlled GitHub Actions Swarm deployment workflow (`.github/workflows/deploy-swarm.yml`) dispatched manually.
+
+## Testing & Quality Gates
 
 ```bash
-php artisan test                         # All tests
+# Run tests
+vendor/bin/phpunit                       # Full PHPUnit suite
+php artisan test                         # Laravel test runner
 php artisan test --testsuite=Feature     # Feature tests only
 php artisan test --testsuite=Unit        # Unit tests only
+
+# Quality & Smoke checks
+./scripts/pint-ratchet.sh HEAD           # Incremental Pint quality ratchet
+./scripts/http-smoke.sh <base-url>       # Deterministic external HTTP smoke test (e.g. http://127.0.0.1:8011)
 ```
+
+- **Continuous Integration**: GitHub Actions executes on GitHub-hosted `ubuntu-latest` for all pushes to `develop` and PRs to `main`, validating PHP 8.4/Laravel 13/Filament 5 parity, Node 24 frontend production asset compilation, full PHPUnit regression, incremental Pint formatting ratchet, and disposable localhost HTTP smoke testing.
+- **Incremental Pint Ratchet**: Code formatting standards are strictly enforced on all PHP files added or modified after baseline `6f6ec58662f6e5b8db3fe6ecf9b6aa281da50f87`. Pre-existing historical formatting debt (49 files) is deferred for a dedicated future formatting task.
+- **Post-Deploy Smoke Testing**: `scripts/http-smoke.sh` provides safe, read-only GET verification (`/up`, `/health`, `/`, `/artikel`, `/admin`) requiring an explicit base URL parameter.
 
 ## Documentation
 
-- [`docs/PRD.md`](docs/PRD.md) — Full Product Requirements Document
-- [`README-DEPLOYMENT.md`](README-DEPLOYMENT.md) — Deployment guide
-- [`.ai/`](.ai/README.md) — AI agent control center
+- [`docs/PRD.md`](docs/PRD.md) — Product Requirements Document
+- [`docs/panduan-cms/panduan-cms.md`](docs/panduan-cms/panduan-cms.md) — Panduan Penggunaan CMS (Bahasa Indonesia)
+- [`.agents/AGENTS.md`](.agents/AGENTS.md) — Repository AI delivery framework & agent guidance
 
 ## Contact
 

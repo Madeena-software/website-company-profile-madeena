@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Academic CMS Frontend Rendering', () => {
   test('should render academic blocks properly on public post', async ({ page }) => {
-    await page.goto('http://localhost:8000/blog/e2e-test-post');
+    await page.goto('http://localhost:8000/artikel/e2e-test-post');
     await page.waitForLoadState('networkidle');
     
     const title = await page.title();

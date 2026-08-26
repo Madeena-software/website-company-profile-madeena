@@ -1,6 +1,5 @@
 # 📖 Panduan Lengkap CMS Website Madeena
 
-
 ---
 
 ## 📋 Daftar Isi
@@ -8,14 +7,15 @@
 1. Ringkasan Cepat (Cheat Sheet)
 2. Masuk ke CMS (Login)
 3. Mengenal Beranda (Dashboard)
-4. Mengelola Halaman Utama Website (Homepage)
-5. Mengelola Produk Inovasi
-6. Menulis & Mengelola Artikel (Fitur Akademik)
-7. Mengelola Halaman Website
-8. Mengelola Acara (Event) & Pesan Tamu
-9. Manajemen Pengguna (Admin)
-10. Pengaturan Website
-11. Tanya Jawab & Pemecahan Masalah (FAQ)
+4. Mengelola Halaman Utama Website (Homepage & Multibahasa)
+5. Mengelola Bahasa Website (Manajemen Bahasa)
+6. Mengelola Produk Inovasi
+7. Menulis & Mengelola Artikel (Fitur Akademik)
+8. Mengelola Halaman Website (Halaman & Alur Publikasi)
+9. Mengelola Acara (Event) & Buku Tamu Digital
+10. Manajemen Pengguna (Hak Akses Admin & Penulis)
+11. Pengaturan Website
+12. Tanya Jawab & Pemecahan Masalah (FAQ)
 
 ---
 
@@ -23,229 +23,284 @@
 
 | Saya ingin... | Langkah singkat |
 |---|---|
-| **Mengedit halaman depan** | Klik 🏠 **Halaman Utama** > Edit blok yang diinginkan > **Simpan Draft** > **Update Prod** |
-| **Menambah produk baru** | Klik 📦 **Produk** > Klik **Buat Baru** > Isi data produk > **Simpan** |
-| **Menulis artikel/berita** | Klik 📝 **Artikel** > Klik **Buat Baru** > Tulis di *Konten Artikel* > **Simpan** |
-| **Membuat halaman profil/lain** | Klik 📄 **Halaman** > Klik **Buat Baru** > Susun blok halaman > **Simpan** |
-| **Mengubah nomor WhatsApp/Alamat** | Klik ⚙️ **Pengaturan** > Ubah di bagian *Informasi Kontak* > **Simpan** |
+| **Mengedit halaman depan (Bahasa Indonesia)** | Klik 🏠 **Halaman Utama** > Pilih Bahasa **Bahasa Indonesia** > Edit blok > **💾 Simpan Draft** > **🚀 Update Prod** |
+| **Menyiapkan halaman depan bahasa lain** | Klik 🏠 **Halaman Utama** > Klik **📋 Duplikat ke Bahasa Lain** > Pilih bahasa target > Terjemahkan isi blok > **💾 Simpan Draft** > **🚀 Update Prod** |
+| **Menambah bahasa baru di website** | Klik 🌐 **Bahasa** > Klik **Buat Baru** > Isi kode & nama bahasa > Atur label antarmuka > **Simpan** |
+| **Menambah produk baru** | Klik 📦 **Produk** > Klik **Buat Baru** > Isi spesifikasi & detail blok > **Simpan** |
+| **Menulis artikel/penelitian akademik** | Klik 📝 **Artikel** > Klik **Buat Baru** > Tulis di *Konten Artikel* (rumus, sitasi, gambar) > Centang *Publikasikan* > **Simpan** |
+| **Membuat halaman profil perusahaan** | Klik 📄 **Halaman** > Klik **Buat Baru** > Susun blok > Klik **Publikasikan** agar bisa dibaca publik |
+| **Mengaktifkan buku tamu acara/event** | Klik 📅 **Kelola Event** > Buat Event & pastikan status **Aktif** menyala > Bagikan tautan buku tamu |
+| **Mengubah nomor WhatsApp / Kontak / Logo** | Klik ⚙️ **Pengaturan** > Ubah di bagian yang diinginkan > **💾 Simpan** |
 
 ---
 
 ## 2. Masuk ke CMS (Login)
 
-CMS (*Content Management System*) adalah "ruang kontrol" website Anda. Dari sini Anda bisa mengubah isi website tanpa harus mengerti pemrograman.
+CMS (*Content Management System*) adalah panel kontrol website PT Madeena Karya Indonesia untuk mengelola seluruh konten dan publikasi secara mudah tanpa memerlukan keahlian pemrograman.
 
-**Langkah 1**: Buka *browser* (Google Chrome atau Mozilla Firefox) di komputer Anda.
-**Langkah 2**: Ketikkan alamat website Anda di bagian atas, ditambahkan dengan `/admin` (contoh: `madeena.co.id/admin`).
-**Langkah 3**: Masukkan email dan kata sandi (*password*) Anda, kemudian klik tombol **Masuk** (*Sign In*).
+**Langkah 1**: Buka peramban (*browser*) seperti Google Chrome, Mozilla Firefox, atau Microsoft Edge.
+**Langkah 2**: Masuk ke alamat website Anda dan tambahkan `/admin` di belakangnya (contoh: `https://madeena.co.id/admin`).
+**Langkah 3**: Anda dapat masuk menggunakan akun **Madeena IAM SSO** (*Single Sign-On*) atau memasukkan email dan kata sandi lokal, kemudian klik tombol **Masuk** (*Sign In*).
 
 ![Halaman Login](./screenshots/01-login/login-overview.png)
-*Gambar 1: Tampilan awal halaman login untuk mengakses CMS.*
+*Gambar 1: Halaman login untuk mengakses panel admin CMS Madeena.*
 
 ---
 
 ## 3. Mengenal Beranda (Dashboard)
 
-Setelah berhasil masuk, Anda akan melihat **Beranda** (*Dashboard*). Ini adalah halaman utama panel admin.
+Setelah berhasil masuk, Anda akan diarahkan ke halaman **Beranda** (*Dashboard*).
 
 ![Beranda Panel Admin](./screenshots/02-dashboard/dashboard-overview.png)
 *Gambar 2: Tampilan Beranda (Dashboard) CMS Madeena.*
 
-### Menu Utama di Sebelah Kiri (*Sidebar*):
+### Menu Utama di Bilah Samping (*Sidebar*):
 
-- 🏠 **Halaman Utama** → Untuk mengubah tampilan dan teks di halaman depan website.
-- 📦 **Produk** → Untuk mengelola daftar produk DDR dan inovasi kesehatan lainnya.
-- 📝 **Artikel** → Untuk mengelola jurnal, publikasi, berita, lengkap dengan editor akademik.
-- 📄 **Halaman** → Untuk membuat halaman kustom (misal: halaman tentang sejarah spesifik).
-- 📅 **Event** → Untuk manajemen acara dan pendaftaran buku tamu.
-- ✉️ **Pesan Tamu** → Untuk melihat *feedback* dan ulasan pengunjung acara.
-- ⚙️ **Pengaturan** → Untuk mengatur informasi kontak, media sosial, logo, dan SEO.
-- 👥 **Manajemen Pengguna** → Untuk menambah atau menghapus admin lain.
-
-Sekarang Anda sudah mengenal Beranda (*Dashboard*). Mari kita mulai dengan hal yang paling penting: **mengelola tampilan halaman utama website Anda**. Klik menu 🏠 **Halaman Utama** di sebelah kiri.
+- 🏠 **Halaman Utama**: Mengatur tata letak, teks, banner hero, dan bagian-bagian di halaman depan untuk setiap bahasa.
+- 🌐 **Bahasa**: Mendaftarkan bahasa baru, mengaktifkan bahasa, dan mengatur terjemahan label antarmuka (*UI labels*).
+- 📦 **Produk**: Mengelola katalog produk DDR (*Digital Direct Radiography*) dan spesifikasi teknisnya.
+- 📝 **Artikel**: Menulis publikasi riset, artikel ilmiah, dan berita dengan editor akademik canggih.
+- 📄 **Halaman**: Membuat halaman profil mandiri (seperti Sejarah Perusahaan, Visi & Misi) lengkap dengan fitur draft, pratinjau, dan publikasi.
+- 📅 **Kelola Event**: Mengelola acara atau pameran dan mengaktifkan formulir buku tamu digital.
+- ✉️ **Semua Pesan Tamu**: Memoderasi pesan, testimoni, serta kesan & pesan yang dikirim oleh pengunjung acara.
+- ⚙️ **Pengaturan**: Mengatur informasi kontak resmi, akun media sosial, logo, warna tema, dan SEO Google.
+- 👥 **Manajemen Pengguna**: Mengatur akun administrator dan staf penulis artikel.
 
 ---
 
-## 4. Mengelola Halaman Utama Website (Homepage)
+## 4. Mengelola Halaman Utama Website (Homepage & Multibahasa)
 
-Halaman utama adalah hal pertama yang dilihat oleh pengunjung website. Anda bisa mengubah urutan, teks, dan gambar pada halaman ini menggunakan sistem blok (seperti menyusun *Lego*).
-
-**Langkah 1**: Klik menu 🏠 **Halaman Utama** di panel sebelah kiri.
+Halaman utama website PT Madeena dibangun dengan sistem blok modular yang fleksibel dan mendukung multibahasa secara dinamis.
 
 ![Halaman Utama Editor](./screenshots/03-homepage/homepage-overview.png)
-*Gambar 3: Daftar "blok" yang menyusun halaman utama website.*
+*Gambar 3: Editor Halaman Utama dengan daftar blok penyusun halaman.*
 
-**Langkah 2**: Untuk mengedit suatu bagian (misal: *Hero Banner* atau *Produk*), klik tanda panah ke bawah (🔽) di sebelah kanan baris tersebut untuk membukanya.
+### Langkah-Langkah Mengedit Halaman Utama:
 
-![Edit Blok Halaman Utama](./screenshots/03-homepage/homepage-edit.png)
-*Gambar 4: Tampilan detail setelah suatu blok dibuka. Anda bisa mengubah teks dan gambar di sini.*
+1. **Pilih Bahasa yang Ingin Diedit**:
+   Gunakan menu pemilih bahasa di bagian atas editor untuk memilih bahasa yang ingin dikelola (misal: *Bahasa Indonesia* atau *English*).
+2. **Buka dan Edit Blok**:
+   Klik tanda panah (🔽) pada blok yang ingin diubah (seperti *Hero Banner*, *Produk*, *Tentang Kami*, atau *Kontak*).
 
-**Langkah 3**: Ubah teks atau unggah gambar yang baru.
-**Langkah 4**: Klik tombol **👁️ Pratinjau** di pojok kanan atas untuk melihat bagaimana hasilnya sebelum ditampilkan ke publik.
-**Langkah 5**: Jika sudah sesuai, klik tombol kuning **💾 Simpan Draft** (disimpan untuk diedit nanti) atau tombol hijau **🚀 Update Prod** untuk langsung menerapkannya di website yang bisa diakses publik.
+   ![Edit Blok Halaman Utama](./screenshots/03-homepage/homepage-edit.png)
+   *Gambar 4: Mengubah teks, gambar, dan tombol aksi di dalam blok halaman utama.*
 
-> ⚠️ **Perhatian**: Jangan lupa klik **Update Prod** jika Anda ingin perubahan tersebut langsung bisa dilihat oleh semua pengunjung website!
+3. **Pratinjau Perubahan**:
+   Klik tombol **👁️ Pratinjau** di pojok kanan atas. Sistem akan membuka tab baru untuk memperlihatkan tampilan draf halaman tanpa mengganggu pengunjung umum.
+4. **Simpan Draft vs Update Produksi**:
+   - **💾 Simpan Draft**: Menyimpan pekerjaan Anda sebagai draf perantara. Pengunjung website belum akan melihat perubahan ini.
+   - **🚀 Update Prod**: Menerapkan seluruh draf yang tersimpan langsung ke website live agar bisa dilihat oleh semua pengunjung publik.
+
+> ⚠️ **Penting**: Perubahan yang Anda simpan sebagai draf tidak akan muncul di website publik sampai Anda menekan tombol hijau **Update Prod**.
+
+### Menyalin Tata Letak ke Bahasa Lain (*Duplikasi Bahasa*):
+
+Jika Anda ingin membuat versi halaman utama untuk bahasa baru (misal bahasa Inggris):
+1. Buka halaman utama bahasa sumber (misal Bahasa Indonesia).
+2. Klik tombol **📋 Duplikat ke Bahasa Lain** di bagian atas.
+3. Pilih bahasa target yang terdaftar.
+4. Sistem akan menyalin seluruh susunan blok sumber ke dalam **draf bahasa target**.
+5. Ganti teks pada blok-blok bahasa target tersebut dengan terjemahan yang sesuai, lalu klik **Simpan Draft** dan **Update Prod**.
+
+*Catatan: Sistem melindungi bahasa target agar tidak tertimpa jika bahasa target tersebut sudah memiliki draf atau konten yang dipublikasikan.*
 
 ---
 
-## 5. Mengelola Produk Inovasi
+## 5. Mengelola Bahasa Website (Manajemen Bahasa)
 
-Menu ini digunakan untuk menampilkan produk-produk seperti sistem *Digital Direct Radiography* (DDR).
+Website Madeena mendukung sistem multibahasa dinamis yang memungkinkan Anda menambah bahasa baru tanpa perlu mengubah kode program.
 
-**Langkah 1**: Klik menu 📦 **Produk** di sebelah kiri. Anda akan melihat daftar semua produk.
+### Langkah-Langkah Menambah Bahasa Baru:
+1. Klik menu 🌐 **Bahasa** di bilah samping kiri.
+2. Klik tombol **Buat Baru**.
+3. Isi informasi bahasa:
+   - **Kode Bahasa**: Kode standar huruf kecil (contoh: `id`, `en`, `ja`, `pt-br`). *Perhatian: Kode bahasa tidak dapat diubah setelah dibuat.*
+   - **Nama Bahasa**: Nama bahasa dalam bahasa Inggris (contoh: `Japanese`).
+   - **Nama Asli (Native Name)**: Nama bahasa dalam aksara aslinya (contoh: `日本語`).
+   - **Urutan Tampilan**: Angka urutan dalam menu pemilih bahasa publik.
+   - **Status Aktif**: Jika dimatikan, bahasa ini tidak akan muncul di menu bahasa publik (berguna saat Anda masih menyiapkan konten).
+   - **Label UI / Terjemahan Antarmuka**: Teks terjemahan untuk tombol umum seperti navigasi, kontak, tombol baca, dan hak cipta.
+4. Klik **Simpan**.
+
+*Catatan: Bahasa default (Bahasa Indonesia) dilindungi oleh sistem dan tidak dapat dinonaktifkan atau dihapus.*
+
+---
+
+## 6. Mengelola Produk Inovasi
+
+Menu ini digunakan untuk menampilkan katalog sistem *Digital Direct Radiography* (DDR) dan inovasi teknologi medis lainnya.
 
 ![Daftar Produk](./screenshots/04-produk/produk-overview.png)
-*Gambar 5: Daftar produk yang sudah Anda masukkan.*
+*Gambar 5: Daftar katalog produk inovasi PT Madeena.*
 
-**Langkah 2**: Untuk menambah produk baru, klik tombol **Buat Baru** (*Create*) di pojok kanan atas. Untuk mengedit produk yang sudah ada, klik ikon pensil (✏️).
+### Menambah atau Mengubah Produk:
+1. Klik menu 📦 **Produk** > Klik **Buat Baru** atau ikon pensil (✏️) pada produk yang ada.
 
-![Edit Produk](./screenshots/04-produk/produk-edit.png)
-*Gambar 6: Formulir pengisian data produk.*
+   ![Edit Produk](./screenshots/04-produk/produk-edit.png)
+   *Gambar 6: Formulir pengisian spesifikasi dan gambar produk.*
 
-**Langkah 3**: Isi **Nama Produk** (contoh: *DDR Pro Series*).
-**Langkah 4**: Isi **Spesifikasi**. Ini adalah tabel. Anda bisa menambah baris baru untuk resolusi, tegangan operasi, dll.
-**Langkah 5**: Unggah **Gambar Produk** dengan mengklik area yang disediakan.
-**Langkah 6**: Pindah ke *tab* (tab menu di bagian atas) **Halaman Detail Produk** untuk menyusun informasi detail menggunakan sistem blok.
-**Langkah 7**: Klik tombol **Simpan** (*Save*) di bagian bawah.
+2. Pada tab **Info Produk**:
+   - Masukkan **Nama Produk** dan **Tagline**.
+   - Isi tabel **Spesifikasi** (tambahkan baris untuk parameter seperti Resolusi Detektor, Tegangan Operasi kV, dan Bidang Aplikasi).
+   - Unggah **Gambar Produk**.
+   - Pastikan sakelar **Aktif** menyala agar produk tampil di website publik.
+3. Pada tab **Halaman Detail Produk**:
+   - Susun konten penjelasan mendalam menggunakan sistem blok (deskripsi fitur, galeri foto, video demonstrasi).
+4. Klik tombol **Simpan**.
 
 ---
 
-## 6. Menulis & Mengelola Artikel (Fitur Akademik)
+## 7. Menulis & Mengelola Artikel (Fitur Akademik)
 
-Menu ini sangat berguna untuk memublikasikan penelitian, jurnal, atau pengumuman resmi.
-
-**Langkah 1**: Klik menu 📝 **Artikel** di panel sebelah kiri.
+CMS Madeena dilengkapi dengan pengolah kata ilmiah khusus untuk memublikasikan hasil penelitian dan jurnal medis standar internasional (gaya Elsevier/Nature).
 
 ![Daftar Artikel](./screenshots/05-artikel/artikel-overview.png)
-*Gambar 7: Daftar artikel dan penelitian yang telah dibuat.*
+*Gambar 7: Daftar artikel penelitian dan publikasi ilmiah.*
 
-**Langkah 2**: Klik **Buat Baru** (*Create*).
+### Alur Menulis Artikel:
+1. Klik menu 📝 **Artikel** > Klik **Buat Baru**.
 
-![Buat Artikel Baru](./screenshots/05-artikel/artikel-edit.png)
-*Gambar 8: Formulir pembuatan artikel dengan tab "Metadata", "Info Akademik", dan "Konten Artikel".*
+   ![Buat Artikel Baru](./screenshots/05-artikel/artikel-edit.png)
+   *Gambar 8: Tab metadata artikel dan penentuan status publikasi.*
 
-**Langkah 3**: Di *tab* **Metadata Artikel**, isi **Judul** dan centang **Publikasikan** jika sudah siap dibaca publik.
-**Langkah 4**: Di *tab* **Info Akademik**, Anda bisa memasukkan **Abstrak** dan nama-nama **Penulis Tambahan/Afiliasi**.
-**Langkah 5**: Klik *tab* **Konten Artikel** untuk mulai menulis isi penelitian.
+2. **Tab Metadata Artikel**:
+   - Isi **Judul Artikel** dan tentukan **Bahasa Konten**.
+   - Isi **Kategori Konten** (misal: *Inovasi*, *Radiologi Medis*, *Kemitraan*).
+   - Tentukan **Penempatan di Halaman Utama** jika ingin artikel ini ditampilkan pada bagian khusus di halaman depan.
+   - Unggah **Gambar Sampul**.
+   - Aktifkan sakelar **Publikasikan** jika artikel sudah siap dibaca publik.
+3. **Tab Info Akademik**:
+   - Masukkan **Abstrak Penelitian** dan **Kata Kunci** (*Keywords*).
+   - Tambahkan daftar **Penulis Tambahan / Afiliasi** (nama institusi dan email).
+4. **Tab Konten Artikel**:
+   - Tulis isi artikel menggunakan *Rich Editor* ilmiah. Sistem secara otomatis menyimpan tulisan Anda setiap 3 detik.
 
-### Menggunakan Editor Teks Akademik (Rich Editor)
+   ![Editor Artikel](./screenshots/05-artikel/artikel-editor.png)
+   *Gambar 9: Rich Editor artikel ilmiah dengan dukungan rumus KaTeX, gambar ber-caption, dan sitasi.*
 
-Sistem CMS ini didesain khusus untuk mendukung penulisan karya tulis ilmiah. Di dalam Konten Artikel, sistem akan secara otomatis menyimpan tulisan Anda setiap 3 detik.
+### Menggunakan Blok Khusus Akademik:
 
-![Editor Artikel](./screenshots/05-artikel/artikel-editor.png)
-*Gambar 9: Tampilan Rich Editor. Perhatikan menu tambahan untuk memasukkan Daftar Pustaka, Persamaan (Equation), Gambar Akademik, dan Tabel.*
-
-Di dalam editor ini, Anda bisa menyisipkan "Blok-blok" khusus akademik. Berikut adalah penjelasan untuk masing-masing blok:
-
-#### A. Daftar Pustaka (References) & Sitasi dalam Paragraf
-Anda bisa menyisipkan daftar pustaka di bagian bawah artikel dan merujuknya (sitasi) di tengah-tengah paragraf tulisan Anda.
-1. Klik tanda **+ (Tambah Blok)** di dalam area penulisan, lalu pilih **Daftar Pustaka / References**.
-2. Masukkan judul jurnal, nama penulis, dll. Sistem akan otomatis memberikan nomor referensi, contoh: **[1]**.
-3. **Untuk Melakukan Sitasi:** Saat Anda mengetik paragraf biasa, ketikkan `[@1]` (atau `[@2]`, dst) tepat di posisi Anda ingin mengutip.
-   *Contoh pengetikan*: `"Berdasarkan pengembangan detektor DDR sebelumnya [@1], dapat disimpulkan bahwa..."*
-   *Hasil di website*: CMS akan secara otomatis mengubah tulisan `[@1]` tersebut menjadi angka rujukan kecil (superscript) yang jika diklik akan melompat langsung ke Daftar Pustaka nomor 1.
-
-#### B. Blok Persamaan Matematika (Equation)
-Klik ikon kalkulator di baris alat (atau pilih blok *Equation*). Akan muncul kolom untuk Anda mengetikkan rumus dalam format *LaTeX*.
-*Contoh*: Ketikkan `E = mc^2` atau `\frac{\partial^2 u}{\partial t^2} = c^2 \nabla^2 u`.
-> Jangan lupa isi kolom **ID Referensi** dengan format berurut (contoh: `eq-1`, `eq-2`) agar persamaan ini diberi nomor otomatis di website, seperti "Persamaan (1)".
-> **Cara Melakukan Sitasi:** Untuk merujuk ke persamaan ini di dalam teks paragraf, gunakan sintaks `[@Persamaan 1]` atau `[@Eq 1]`. Sistem akan otomatis membuatkannya tautan klik.
-
-#### C. Blok Gambar (Figure) Akademik
-Klik ikon Gambar/Foto. Berbeda dengan gambar biasa, blok ini meminta Anda untuk:
-- Mengunggah gambar/ilustrasi.
-- Mengisi **Caption** (Keterangan Gambar).
-- Mengisi **ID Referensi** berurut (contoh: `fig-1`, `fig-2`). 
-Hasilnya di website akan tampil rapi dan berurutan secara otomatis, misal: **Gambar 1: Ilustrasi SEM pada detektor**.
-> **Cara Melakukan Sitasi:** Di dalam teks paragraf, Anda bisa merujuk ke gambar ini dengan mengetikkan `[@Gambar 1]` atau `[@Fig 1]`.
-
-#### D. Blok Tabel (Table) Akademik
-Klik ikon Tabel, lalu masukkan tabel dalam format standar HTML. Jika Anda memberikan **ID Referensi** (contoh: `tbl-1`, `tbl-2`), CMS akan menampilkan keterangannya sebagai **Tabel 1: Hasil Pengukuran Suhu** dan seterusnya secara berurutan.
-> **Cara Melakukan Sitasi:** Untuk menyebut tabel ini di dalam tulisan Anda, ketikkan `[@Tabel 1]` atau `[@Table 1]`.
-
-> 💡 **Tips Penomoran Otomatis**: Pastikan Anda mengaktifkan sakelar hijau **"Aktifkan Penomoran Otomatis"** yang berada di atas area penulisan agar CMS mengurus urutan seluruh nomor (Bab H2, Gambar, Tabel, Persamaan) secara otomatis!
+- **A. Persamaan Matematika (Equation)**:
+  Klik ikon rumus dan ketik persamaan dalam format LaTeX (contoh: `E = mc^2` atau `\sigma = \sqrt{\frac{1}{N}\sum_{i=1}^N (x_i - \mu)^2}`). Beri ID Referensi (contoh: `eq-1`).
+- **B. Gambar Ilmiah (Figure)**:
+  Unggah gambar, isi keterangan gambar (*Caption*), dan beri ID Referensi (contoh: `fig-1`). Sistem akan otomatis memberi nomor urut seperti *Gambar 1: Ilustrasi Detektor CCXD*.
+- **C. Tabel Ilmiah (Table)**:
+  Masukkan tabel HTML dan beri ID Referensi (contoh: `tbl-1`).
+- **D. Daftar Pustaka & Sitasi**:
+  Tambahkan blok *Daftar Pustaka*, isi data jurnal/buku. Di dalam paragraf tulisan Anda, ketik `[@1]` atau `[@2]`. CMS akan otomatis mengubahnya menjadi angka rujukan klik yang terhubung langsung ke daftar referensi di bawah artikel!
 
 ---
 
-## 7. Mengelola Halaman Website
+## 8. Mengelola Halaman Website (Halaman & Alur Publikasi)
 
-Mirip dengan Halaman Utama, fitur 📄 **Halaman** digunakan untuk membuat halaman-halaman profil perusahaan yang berdiri sendiri (contoh: Sejarah Perusahaan, Visi & Misi).
+Fitur 📄 **Halaman** digunakan untuk membuat halaman profil perusahaan yang berdiri sendiri (contoh: Sejarah Perusahaan, Visi & Misi, Sertifikasi Mutu ISO).
 
 ![Daftar Halaman](./screenshots/06-halaman/halaman-overview.png)
-*Gambar 10: Daftar Halaman Kustom.*
+*Gambar 10: Daftar Halaman Kustom dengan status publikasi.*
 
-Anda bisa mengatur apakah halaman ini ingin ditampilkan di **Navigasi Header** (menu bagian atas website) atau di **Footer** (menu bagian paling bawah website). Penyusunan kontennya menggunakan sistem "Blok" yang sama persis dengan Halaman Utama.
+### Alur Kerja Publikasi Halaman:
+
+1. **Halaman Baru Dimulai Sebagai Draf**:
+   Ketika Anda membuat halaman baru, halaman tersebut otomatis berstatus **Draft (Belum Dipublikasikan)** sehingga aman dari akses publik luar.
+2. **Pratinjau Draf**:
+   Klik tombol **👁️ Pratinjau** pada daftar halaman untuk memeriksa tampilan halaman draf di tab baru peramban Anda.
+3. **Mempublikasikan Halaman**:
+   Jika konten sudah siap dan disetujui, klik tombol hijau **Publikasikan**. Halaman akan langsung aktif dan dapat diakses publik pada alamat `/halaman/{slug-halaman}`.
+4. **Menarik Kembali ke Draf (*Unpublish*)**:
+   Jika halaman perlu ditarik sementara dari publik, klik tombol **Batal Publikasi**. Pengunjung umum yang membuka alamat tersebut akan melihat pesan *404 Halaman Tidak Ditemukan*.
+
+> ⚠️ **Catatan Penting untuk Operator**:
+> Fitur publikasi halaman berfungsi sebagai sakelar akses publik. Jika Anda mengedit halaman yang **sudah berstatus Terpublikasi**, setiap perubahan yang Anda simpan akan **langsung terupdate di website live**.
+> *Tips: Jika ingin melakukan perombakan besar pada halaman yang sudah live, Anda dapat menekan "Batal Publikasi" terlebih dahulu atau membuat halaman draf baru.*
+
+*(Catatan Navigasi: Opsi centang Header/Footer di form halaman merupakan catatan internal. Untuk menambahkan tautan halaman ke menu atas website, gunakan menu **Pengaturan > Navigasi Tambahan**).*
 
 ---
 
-## 8. Mengelola Acara (Event) & Pesan Tamu
+## 9. Mengelola Acara (Event) & Buku Tamu Digital
 
-Website Anda dilengkapi fitur untuk mendata acara yang diselenggarakan oleh PT Madeena, sekaligus menyediakan buku tamu digital untuk menghimpun kesan dan pesan (feedback) dari kolega.
-
-### Mengelola Event (Acara)
-
-**Langkah 1**: Klik menu 📅 **Event** di panel sebelah kiri.
+CMS Madeena dilengkapi modul acara untuk mendukung partisipasi PT Madeena dalam pameran alkes, simposium kesehatan, dan expo teknologi.
 
 ![Daftar Event](./screenshots/09-events/events-overview.png)
-*Gambar 11: Daftar Acara/Event.*
+*Gambar 11: Daftar Acara dan Event PT Madeena.*
 
-**Langkah 2**: Klik **Buat Baru**.
-**Langkah 3**: Isi Nama Acara (misal: *Simposium Fisika Nasional 2026*), Deskripsi, serta Tanggal Mulai dan Selesai.
-**Langkah 4**: Simpan. Setelah disimpan, sistem akan secara otomatis mengaktifkan tautan Buku Tamu khusus untuk acara tersebut.
+### Mengatur Event:
+1. Klik menu 📅 **Kelola Event** > Klik **Buat Baru**.
+2. Masukkan **Nama Acara**, **Deskripsi**, serta **Tanggal Mulai dan Selesai**.
+3. **Sakelar Status Aktif (`is_active`)**:
+   - **Aktif (Nyala)**: Formulir buku tamu di `/events/{slug}/feedback` dapat diakses dan menerima kiriman kesan & pesan dari pengunjung pameran.
+   - **Nonaktif (Mati)**: Formulir buku tamu otomatis ditutup (menampilkan 404).
 
-### Mengecek Pesan Tamu (Guest Messages)
-
-Ketika tamu atau kolega menghadiri acara dan mengisi formulir kesan dan pesan secara *online*, datanya akan otomatis masuk ke menu **Pesan Tamu**.
+### Memoderasi Pesan Tamu (Guest Messages):
+Setiap ulasan atau pesan yang dikirim oleh tamu pameran akan otomatis tercatat di menu ✉️ **Semua Pesan Tamu**.
 
 ![Daftar Pesan Tamu](./screenshots/10-guest-messages/guest-messages-overview.png)
-*Gambar 12: Daftar Pesan Tamu yang masuk beserta detail instansi, jabatan, dan nomor kontak.*
+*Gambar 12: Daftar pesan dan kesan tamu yang masuk.*
 
-Anda bisa mengklik tombol Edit (✏️) pada pesan tertentu untuk melihat pesan selengkapnya. Di sana, Anda bisa mengatur apakah pesan tamu ini hanya untuk dibaca internal (**is_visible = mati**), atau Anda ingin menampilkannya di halaman testimoni publik (**is_visible = nyala**).
+- Klik ikon edit (✏️) untuk melihat detail instansi, jabatan, dan nomor kontak tamu.
+- **Sakelar Visibilitas (`is_visible`)**:
+  - Jika Anda ingin menampilkan pesan tersebut di layar pameran live (`/events/{slug}/display`), pastikan status visibilitas aktif.
+  - Jika pesan bersifat pribadi atau tidak layak tayang di layar umum, matikan sakelar visibilitas.
+
+*Sistem dilengkapi perlindungan anti-spam otomatis, batas kecepatan pengiriman per menit, dan pencegahan pengiriman ganda.*
 
 ---
 
-## 9. Manajemen Pengguna (Admin)
+## 10. Manajemen Pengguna (Hak Akses Admin & Penulis)
 
-Menu 👥 **Manajemen Pengguna** digunakan untuk mengatur siapa saja yang boleh masuk ke dalam CMS ini.
+Menu 👥 **Manajemen Pengguna** digunakan untuk mengatur siapa saja yang berhak masuk ke dalam CMS.
 
 ![Daftar Pengguna](./screenshots/08-pengguna/pengguna-overview.png)
-*Gambar 13: Daftar pengguna CMS.*
+*Gambar 13: Daftar pengguna CMS dan perannya.*
 
-Anda bisa mengubah status (Role) seseorang menjadi **Admin** (memiliki akses penuh seperti Anda) atau **User** (akses terbatas, misalnya hanya boleh menulis Artikel).
+### Jenis Peran (*Role*):
+- **Admin**: Memiliki kendali penuh atas semua menu (Halaman Utama, Bahasa, Produk, Artikel, Halaman, Event, Pengaturan, dan Pengguna).
+- **User (Penulis)**: Dikhususkan bagi peneliti atau staf penulis yang hanya memiliki akses untuk menulis dan mengedit artikel penelitian milik mereka sendiri. Menu lain akan disembunyikan secara otomatis.
 
 ---
 
-## 10. Pengaturan Website
+## 11. Pengaturan Website
 
-Menu ⚙️ **Pengaturan** mengatur tampilan keseluruhan dari website Anda.
+Menu ⚙️ **Pengaturan** digunakan untuk mengatur identitas global dan branding perusahaan.
 
 ![Pengaturan Website](./screenshots/07-pengaturan/pengaturan-overview.png)
-*Gambar 14: Halaman pengaturan kontak, SEO, dan estetika warna website.*
+*Gambar 14: Pengaturan kontak resmi, SEO, branding logo, dan tombol WhatsApp.*
 
-- **Informasi Kontak**: Untuk mengubah alamat kantor, nomor telepon, dan email utama.
-- **Media Sosial**: Untuk memperbarui tautan ke LinkedIn atau kanal YouTube riset Anda.
-- **SEO**: Untuk mengubah apa yang akan tampil jika nama PT Madeena dicari di Google.
-- **Pengaturan Tampilan**: Untuk mengganti Logo perusahaan dan tema warna utama website.
-- **Tombol WhatsApp Melayang**: Jika diaktifkan, akan muncul ikon WhatsApp di pojok layar website agar instansi/pembeli bisa langsung mengirim pesan ke staf teknis Anda.
+- **Informasi Kontak**: Mengubah alamat kantor pusat Yogyakarta, email resmi, dan nomor telepon layanan.
+- **Media Sosial**: Menautkan akun resmi LinkedIn, Instagram, dan YouTube riset.
+- **SEO**: Mengatur judul (*Meta Title*) dan deskripsi singkat (*Meta Description*) yang muncul pada pencarian Google.
+- **Navigasi Tambahan**: Menambahkan menu link kustom pada navigasi atas website.
+- **Pengaturan Tampilan (Branding)**: Mengunggah file Logo resmi PT Madeena, menentukan warna tema utama (*Primary/Secondary*), dan memilih jenis huruf (*Font Family*).
+- **Tombol WhatsApp Melayang**: Menampilkan tombol chat WhatsApp di sudut kanan bawah website agar pengunjung dapat langsung berkonsultasi dengan staf teknis.
 
 ---
 
-## 11. Tanya Jawab & Pemecahan Masalah (FAQ)
+## 12. Tanya Jawab & Pemecahan Masalah (FAQ)
 
-**T: Mengapa perubahan yang saya buat di Halaman Utama belum muncul di website?**
-J: Anda mungkin baru mengklik "Simpan Draft". Anda harus mengklik tombol hijau **Update Prod** (Update Production) agar perubahan diterapkan ke website publik.
+**T: Mengapa perubahan yang saya simpan di Halaman Utama belum terlihat oleh pengunjung umum?**
+J: Anda kemungkinan baru menekan tombol **💾 Simpan Draft**. Untuk menerapkannya ke pengunjung umum, klik tombol hijau **🚀 Update Prod** di pojok kanan atas editor.
 
-**T: Bagaimana cara memastikan sitasi [1] nyambung ke daftar referensi?**
-J: Pastikan Anda menambahkan blok "Daftar Pustaka / References" di editor, dan ketik format persis `[@1]`, `[@2]`, dst. di dalam paragraf. Penomoran akan mengikuti urutan Anda di blok daftar pustaka.
+**T: Mengapa bahasa yang baru saya buat belum muncul di pemilih bahasa website?**
+J: Pastikan status **Aktif** pada bahasa tersebut sudah dinyalakan di menu 🌐 **Bahasa**, dan pastikan Anda sudah mengisi draf halaman utama untuk bahasa tersebut serta menekan tombol **Update Prod**.
 
-**T: Saya lupa kata sandi (password), apa yang harus dilakukan?**
-J: CMS ini telah terintegrasi dengan jaringan SSO *madeena-iam*. Silakan klik "Lupa Kata Sandi" di halaman utama *Single Sign-On* Anda.
+**T: Bagaimana cara membuat halaman yang hanya bisa dilihat oleh tim internal terlebih dahulu?**
+J: Biarkan status halaman dalam keadaan **Draft (Belum Dipublikasikan)**, lalu gunakan tombol **👁️ Pratinjau** untuk melihat tampilannya. Pengunjung umum tidak akan bisa membuka halaman tersebut sampai Anda menekan **Publikasikan**.
 
-### 📞 Butuh Bantuan?
+**T: Mengapa formulir buku tamu event menampilkan pesan "Halaman Tidak Ditemukan (404)"?**
+J: Periksa menu 📅 **Kelola Event** dan pastikan sakelar **Aktif** pada acara tersebut dalam posisi menyala.
 
-Jika Anda mengalami masalah yang tidak tercantum di atas, silakan hubungi:
+**T: Bagaimana cara membuat kutipan rumus atau gambar akademik di dalam teks artikel?**
+J: Pastikan blok rumus atau gambar telah diberi ID referensi (contoh: `eq-1` atau `fig-1`), lalu di dalam teks ketikkan `[@Persamaan 1]` atau `[@Gambar 1]`.
 
-- **Tim Teknis Madeena**: support@madeena.co.id
-- **Jam Operasional**: Senin–Jumat, 08.00–17.00 WIB
+**T: Saya lupa kata sandi login, bagaimana cara memperbaruinya?**
+J: Jika akun Anda terhubung dengan Madeena IAM SSO, silakan gunakan fitur pemulihan kata sandi pada portal Madeena IAM. Jika menggunakan akun lokal, hubungi administrator utama untuk mengatur ulang kata sandi Anda.
 
-> 💡 **Tips**: Saat menghubungi tim teknis, jelaskan langkah-langkah yang sudah Anda lakukan dan kirimkan tangkapan layar (*screenshot*) jika memungkinkan. Untuk mengambil tangkapan layar, tekan tombol **PrtSc** (Print Screen) di keyboard komputer Anda.
+---
+
+### 📞 Kontak Bantuan Teknis
+
+Jika memerlukan bantuan teknis lebih lanjut mengenai pengoperasian CMS, silakan hubungi:
+
+- **Tim Teknis PT Madeena Karya Indonesia**: madeenajog@gmail.com
+- **Layanan WhatsApp**: +62 857 2830 4141
+- **Jam Operasional Dukungan**: Senin – Jumat, 08.00 – 17.00 WIB

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="{{ isset($locale) ? \App\Models\Setting::normalizeLocale($locale) : 'id' }}">
 
 <head>
     <meta charset="UTF-8">
@@ -51,16 +51,22 @@
 
 <body class="font-sans bg-white text-gray-900 antialiased">
     @php
-    $navItems = $navItems ?? \App\Filament\Pages\HomepageEditor::getNavigation();
+    $currentCode = isset($locale) ? \App\Models\Language::normalizeCode($locale) : 'id';
+    $currentLanguage = \App\Models\Language::resolve($currentCode) ?? \App\Models\Language::getDefault();
+    $activeLanguages = \App\Models\Language::getActive();
+    $navItems = $navItems ?? \App\Filament\Pages\HomepageEditor::getNavigation(false, $currentCode);
     $contactInfo = $contactInfo ?? \App\Models\Setting::getJson('contact_info', []);
     $socialMedia = $socialMedia ?? \App\Models\Setting::getJson('social_media', []);
     $whatsappBtn = $whatsapp ?? \App\Models\Setting::getJson('whatsapp_button', ['enabled' => true, 'number' => '']);
+    $homeBaseUrl = $currentLanguage->homepageUrl();
+    $previewQuery = request('preview') === 'true' ? '?preview=true' : '';
+    $showLanguageSwitcher = $showLanguageSwitcher ?? false;
     @endphp
 
     <header class="fixed top-0 left-0 right-0 z-50 bg-madeena-blue/95 backdrop-blur-sm shadow-lg" x-data="{ open: false }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 md:h-20">
-                <a href="{{ route('home') }}" class="flex items-center gap-3">
+                <a href="{{ $currentLanguage->homepageUrl() }}" class="flex items-center gap-3">
                     @if(!empty($branding['logo']))
                     <img src="{{ route('storage.public', ['path' => $branding['logo']]) }}" alt="Logo" class="h-10 w-auto">
                     @else
@@ -74,9 +80,44 @@
                     @if($item['is_external'] ?? false)
                     <a href="{{ $item['url'] }}" target="_blank" class="text-white/90 hover:text-white font-medium transition-colors">{{ $item['label'] }}</a>
                     @else
-                    <a href="{{ url('/') }}{{ $item['anchor'] ?? '' }}" class="text-white/90 hover:text-white font-medium transition-colors">{{ $item['label'] }}</a>
+                    <a href="{{ $homeBaseUrl }}{{ $item['anchor'] ?? '' }}" class="text-white/90 hover:text-white font-medium transition-colors">{{ $item['label'] }}</a>
                     @endif
                     @endforeach
+
+                    @if(!empty($showLanguageSwitcher) && $activeLanguages->count() > 1)
+                        @if($activeLanguages->count() <= 3)
+                        {{-- Compact Inline Dynamic Language Selector (<= 3 languages) --}}
+                        <div class="flex items-center text-xs font-semibold border border-white/30 rounded-full px-2.5 py-1 text-white gap-1.5 ml-2" data-testid="language-switcher-desktop" data-layout="inline">
+                            @foreach($activeLanguages as $idx => $l)
+                                @if($idx > 0)
+                                    <span class="text-white/40">|</span>
+                                @endif
+                                @if($l->code === $currentCode)
+                                    <span class="text-white bg-white/20 px-1.5 py-0.5 rounded font-bold" title="{{ $l->native_name }}">{{ strtoupper($l->code) }}</span>
+                                @else
+                                    <a href="{{ $l->homepageUrl($previewQuery !== '') }}" class="text-white/70 hover:text-white transition-colors" title="{{ $l->native_name }}">{{ strtoupper($l->code) }}</a>
+                                @endif
+                            @endforeach
+                        </div>
+                        @else
+                        {{-- Scalable Dropdown Language Selector (> 3 languages) --}}
+                        <div class="relative ml-2" x-data="{ langOpen: false }" @click.outside="langOpen = false" data-testid="language-switcher-desktop" data-layout="dropdown">
+                            <button type="button" @click="langOpen = !langOpen" class="flex items-center gap-1.5 text-xs font-semibold border border-white/30 rounded-full px-3 py-1 text-white hover:bg-white/10 transition-colors" aria-expanded="false" data-testid="language-dropdown-toggle">
+                                <i class="fas fa-globe text-white/80"></i>
+                                <span>{{ strtoupper($currentCode) }}</span>
+                                <i class="fas fa-chevron-down text-[10px] text-white/70 transition-transform duration-200" :class="{ 'rotate-180': langOpen }"></i>
+                            </button>
+                            <div x-show="langOpen" x-transition class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 py-1.5 z-50 overflow-hidden" style="display: none;" data-testid="language-dropdown-menu">
+                                @foreach($activeLanguages as $l)
+                                    <a href="{{ $l->homepageUrl($previewQuery !== '') }}" class="flex items-center justify-between px-4 py-2 text-xs font-medium transition-colors {{ $l->code === $currentCode ? 'bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 font-bold' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700' }}" data-testid="lang-link-{{ $l->code }}">
+                                        <span>{{ $l->native_name }}</span>
+                                        <span class="text-[10px] uppercase font-mono px-1.5 py-0.5 rounded {{ $l->code === $currentCode ? 'bg-primary-100 text-primary-700 dark:bg-primary-900/60 dark:text-primary-300' : 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400' }}">{{ $l->code }}</span>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                        @endif
+                    @endif
                 </nav>
 
                 <button @click="open = !open" class="md:hidden text-white p-2">
@@ -90,9 +131,50 @@
                 @if($item['is_external'] ?? false)
                 <a href="{{ $item['url'] }}" target="_blank" class="block text-white/90 hover:text-white font-medium py-2 transition-colors">{{ $item['label'] }}</a>
                 @else
-                <a href="{{ url('/') }}{{ $item['anchor'] ?? '' }}" class="block text-white/90 hover:text-white font-medium py-2 transition-colors">{{ $item['label'] }}</a>
+                <a href="{{ $homeBaseUrl }}{{ $item['anchor'] ?? '' }}" class="block text-white/90 hover:text-white font-medium py-2 transition-colors">{{ $item['label'] }}</a>
                 @endif
                 @endforeach
+
+                @if(!empty($showLanguageSwitcher) && $activeLanguages->count() > 1)
+                    @if($activeLanguages->count() <= 3)
+                    {{-- Mobile Inline Dynamic Language Selector (<= 3 languages) --}}
+                    <div class="pt-2 border-t border-white/10 flex items-center justify-between px-1" data-testid="language-switcher-mobile" data-layout="inline">
+                        <span class="text-xs text-white/70 font-medium">{{ $currentLanguage->getUiLabel('language', 'Bahasa') }}:</span>
+                        <div class="inline-flex items-center text-xs font-semibold border border-white/30 rounded-full px-2.5 py-1 text-white gap-1.5">
+                            @foreach($activeLanguages as $idx => $l)
+                                @if($idx > 0)
+                                    <span class="text-white/40">|</span>
+                                @endif
+                                @if($l->code === $currentCode)
+                                    <span class="text-white bg-white/20 px-1.5 py-0.5 rounded font-bold" title="{{ $l->native_name }}">{{ strtoupper($l->code) }}</span>
+                                @else
+                                    <a href="{{ $l->homepageUrl($previewQuery !== '') }}" class="text-white/70 hover:text-white transition-colors" title="{{ $l->native_name }}">{{ strtoupper($l->code) }}</a>
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
+                    @else
+                    {{-- Mobile Scalable Dropdown/Grid Selector (> 3 languages) --}}
+                    <div class="pt-2 border-t border-white/10 space-y-2 px-1" data-testid="language-switcher-mobile" data-layout="dropdown" x-data="{ mobileLangOpen: false }">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-white/70 font-medium">{{ $currentLanguage->getUiLabel('language', 'Bahasa') }}:</span>
+                            <button type="button" @click="mobileLangOpen = !mobileLangOpen" class="inline-flex items-center gap-1.5 text-xs font-semibold border border-white/30 rounded-full px-3 py-1 text-white bg-white/10" data-testid="mobile-language-dropdown-toggle">
+                                <i class="fas fa-globe text-white/80"></i>
+                                <span>{{ $currentLanguage->native_name }} ({{ strtoupper($currentCode) }})</span>
+                                <i class="fas fa-chevron-down text-[10px] text-white/70 transition-transform duration-200" :class="{ 'rotate-180': mobileLangOpen }"></i>
+                            </button>
+                        </div>
+                        <div x-show="mobileLangOpen" x-transition class="grid grid-cols-2 gap-1.5 pt-2 bg-black/20 p-2 rounded-xl border border-white/10" style="display: none;" data-testid="mobile-language-menu">
+                            @foreach($activeLanguages as $l)
+                                <a href="{{ $l->homepageUrl($previewQuery !== '') }}" class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-xs {{ $l->code === $currentCode ? 'bg-white text-madeena-blue font-bold shadow-sm' : 'text-white/80 hover:bg-white/10' }}" data-testid="mobile-lang-link-{{ $l->code }}">
+                                    <span class="truncate">{{ $l->native_name }}</span>
+                                    <span class="text-[10px] font-mono ml-1 opacity-70">{{ strtoupper($l->code) }}</span>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+                @endif
             </div>
         </div>
     </header>
@@ -121,19 +203,19 @@
                     </p>
                 </div>
                 <div>
-                    <h4 class="font-semibold text-lg mb-4">Navigasi</h4>
+                    <h4 class="font-semibold text-lg mb-4">{{ $currentLanguage->getUiLabel('navigation', 'Navigasi') }}</h4>
                     <ul class="space-y-2 text-white/70">
                         @foreach($navItems as $item)
                         @if($item['is_external'] ?? false)
                         <li><a href="{{ $item['url'] }}" target="_blank" class="hover:text-white transition-colors">{{ $item['label'] }}</a></li>
                         @else
-                        <li><a href="{{ url('/') }}{{ $item['anchor'] ?? '' }}" class="hover:text-white transition-colors">{{ $item['label'] }}</a></li>
+                        <li><a href="{{ $homeBaseUrl }}{{ $item['anchor'] ?? '' }}" class="hover:text-white transition-colors">{{ $item['label'] }}</a></li>
                         @endif
                         @endforeach
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-semibold text-lg mb-4">Kontak</h4>
+                    <h4 class="font-semibold text-lg mb-4">{{ $currentLanguage->getUiLabel('contact', 'Kontak') }}</h4>
                     <ul class="space-y-2 text-white/70 text-sm">
                         @if(!empty($contactInfo['email']))
                         <li class="flex items-start gap-2">
@@ -197,7 +279,7 @@
                     </a>
                     @endif
                 </div>
-                <p class="text-white/50 text-sm">v{{ config('app.version', '1.0') }} &copy; {{ date('Y') }} PT Madeena Karya Indonesia. Seluruh hak dilindungi.</p>
+                <p class="text-white/50 text-sm">v{{ config('app.version', '1.0') }} &copy; {{ date('Y') }} PT Madeena Karya Indonesia. {{ $currentLanguage->getUiLabel('all_rights_reserved', 'Seluruh hak dilindungi.') }}</p>
             </div>
         </div>
     </footer>
@@ -213,8 +295,8 @@
     @if(!empty($isPreview))
     <div style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; background-color: #ea580c; color: white; text-align: center; padding: 12px 16px; box-shadow: 0 -4px 6px -1px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; gap: 12px;">
         <i class="fas fa-info-circle" style="font-size: 1.25rem;"></i>
-        <span style="font-weight: 500; font-size: 0.875rem;">Anda sedang melihat Mode Pratinjau (Draft).</span>
-        <a href="{{ url('/admin/homepage-editor') }}" style="margin-left: 16px; padding: 6px 16px; background-color: white; color: #ea580c; border-radius: 6px; font-weight: bold; font-size: 0.875rem; text-decoration: none; box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);">Kembali</a>
+        <span style="font-weight: 500; font-size: 0.875rem;">{{ $currentLanguage->getUiLabel('preview_mode_notice', 'Anda sedang melihat Mode Pratinjau (Draft).') }}</span>
+        <a href="{{ url('/admin/homepage-editor') }}" style="margin-left: 16px; padding: 6px 16px; background-color: white; color: #ea580c; border-radius: 6px; font-weight: bold; font-size: 0.875rem; text-decoration: none; box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05);">{{ $currentLanguage->getUiLabel('back', 'Kembali') }}</a>
     </div>
     @endif
 

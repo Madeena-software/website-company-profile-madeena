@@ -1,5 +1,8 @@
-{{-- sections/blog.blade.php --}}
-@php $posts = $section['posts'] ?? collect(); @endphp
+@php
+    $posts = $section['posts'] ?? collect();
+    $currentLang = $language ?? \App\Models\Language::resolve($locale ?? null) ?? \App\Models\Language::getDefault();
+    $articlesTitle = $data['section_title'] ?? $currentLang->getUiLabel('articles', 'Artikel');
+@endphp
 @if($posts->isNotEmpty())
 <section id="{{ $data['section_id'] ?? 'blog' }}" class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -35,7 +38,7 @@
                         @endif
                         <a href="{{ route('post.show', ['post' => $post->slug ?: $post->id]) }}"
                            class="text-madeena-teal font-semibold text-sm hover:text-madeena-blue transition-colors">
-                            Baca <i class="fas fa-arrow-right ml-1"></i>
+                            {{ $currentLang->getUiLabel('read', 'Baca') }} <i class="fas fa-arrow-right ml-1"></i>
                         </a>
                     </div>
                 </div>
@@ -43,7 +46,7 @@
             @endforeach
         </div>
         <div class="text-center mt-10">
-            <a href="{{ route('artikel.index') }}" class="btn-secondary">Lihat Semua {{ $data['section_title'] ?? 'Artikel' }}</a>
+            <a href="{{ route('artikel.index') }}" class="btn-secondary">{{ $currentLang->getUiLabel('view_all', ['title' => $articlesTitle]) }}</a>
         </div>
     </div>
 </section>

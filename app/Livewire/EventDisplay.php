@@ -22,6 +22,6 @@ class EventDisplay extends Component
 
         return view('livewire.event-display', [
             'messages' => $messages,
-        ]);
+        ])->title($this->event->name.' — Live Display | PT Madeena Karya Indonesia');
     }
 }

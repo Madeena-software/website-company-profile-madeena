@@ -84,7 +84,7 @@ class SettingSeeder extends Seeder
                     'section_title'   => 'Produk Inovasi Teknologi Kesehatan',
                     'section_subtitle' => 'Berstandar Nasional, Izin Edar Kemenkes RI',
                 ]],
-                ['type' => 'blog', 'data' => [
+                ['type' => 'artikel', 'data' => [
                     'section_id'    => 'insight',
                     'show_in_nav'   => true,
                     'nav_label'     => 'Insight',

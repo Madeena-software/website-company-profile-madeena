@@ -15,6 +15,8 @@ class Page extends Model
         'show_in_header',
         'show_in_footer',
         'summary',
+        'is_published',
+        'published_at',
     ];
 
     protected $casts = [
@@ -22,5 +24,11 @@ class Page extends Model
         'enable_auto_numbering' => 'boolean',
         'show_in_header' => 'boolean',
         'show_in_footer' => 'boolean',
+        'is_published' => 'boolean',
+        'published_at' => 'datetime',
+    ];
+
+    protected $attributes = [
+        'is_published' => false,
     ];
 }

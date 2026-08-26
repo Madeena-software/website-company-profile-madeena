@@ -15,7 +15,7 @@ const viewports = [
 const routes = [
   { name: 'homepage', path: '/' },
   { name: 'product_detail', path: '/produk/ddr-madeena-hf100b-mdn' },
-  { name: 'blog_post', path: '/blog/madeena-luncurkan-ddr-hf100b-mdn' },
+  { name: 'artikel_post', path: '/artikel/madeena-luncurkan-ddr-hf100b-mdn' },
   { name: 'static_page', path: '/halaman/tentang' },
   { name: 'inabuyer_feedback', path: '/inabuyer2026/feedback' },
   { name: 'inabuyer_display', path: '/inabuyer2026/display' }

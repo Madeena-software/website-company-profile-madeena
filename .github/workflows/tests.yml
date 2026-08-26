@@ -2,28 +2,49 @@ name: Tests
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   NODE_OPTIONS: "--dns-result-order=ipv4first"
 
 jobs:
   tests:
-    runs-on: self-hosted
-    name: PHP 8.4
+    name: PHP 8.4 Regression & Smoke
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.4'
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, mysql, pdo_mysql, pdo_mysql, bcmath, gd, intl, igbinary, redis
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, gd, intl
           coverage: none
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+
+      - name: Validate Composer configuration
+        run: composer validate --no-interaction
 
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-interaction --no-progress
@@ -43,5 +64,59 @@ jobs:
       - name: Generate app key
         run: php artisan key:generate
 
-      - name: Execute tests
+      - name: Pint Quality Ratchet
+        run: ./scripts/pint-ratchet.sh HEAD
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build frontend assets
+        run: npm run build
+
+      - name: Execute PHPUnit regression suite
         run: vendor/bin/phpunit
+
+      - name: Localhost HTTP Smoke Test
+        run: |
+          set -euo pipefail
+          SMOKE_PORT=18926
+          SMOKE_DB="${RUNNER_TEMP:-/tmp}/smoke-test.sqlite"
+          rm -f "$SMOKE_DB"
+          touch "$SMOKE_DB"
+
+          cleanup() {
+            if [ -n "${SERVER_PID:-}" ] && kill -0 "$SERVER_PID" 2>/dev/null; then
+              echo "Stopping background server (PID: $SERVER_PID)..."
+              kill "$SERVER_PID" 2>/dev/null || true
+            fi
+            rm -f "$SMOKE_DB"
+          }
+          trap cleanup EXIT
+
+          export APP_ENV=testing
+          export DB_CONNECTION=sqlite
+          export DB_DATABASE="$SMOKE_DB"
+          export SESSION_DRIVER=array
+          export CACHE_STORE=array
+          export QUEUE_CONNECTION=sync
+
+          php artisan migrate --force
+
+          php artisan serve --host=127.0.0.1 --port="$SMOKE_PORT" > /dev/null 2>&1 &
+          SERVER_PID=$!
+
+          READY=0
+          for i in $(seq 1 30); do
+            if curl -s -o /dev/null -w "%{http_code}" --connect-timeout 1 "http://127.0.0.1:${SMOKE_PORT}/up" | grep -q "200"; then
+              READY=1
+              break
+            fi
+            sleep 0.5
+          done
+
+          if [ "$READY" -ne 1 ]; then
+            echo "❌ Error: Server failed to start on http://127.0.0.1:${SMOKE_PORT}"
+            exit 1
+          fi
+
+          ./scripts/http-smoke.sh "http://127.0.0.1:${SMOKE_PORT}"

@@ -13,8 +13,8 @@
 @section('content')
 <div class="pt-24 pb-20">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <a href="{{ route('blog.index') }}" class="inline-flex items-center gap-2 text-madeena-teal hover:text-madeena-blue transition-colors mb-8">
-            <i class="fas fa-arrow-left"></i> Kembali ke Blog
+        <a href="{{ route('artikel.index') }}" class="inline-flex items-center gap-2 text-madeena-teal hover:text-madeena-blue transition-colors mb-8">
+            <i class="fas fa-arrow-left"></i> Kembali ke Artikel
         </a>
 
         <article class="bg-white rounded-2xl shadow-lg overflow-hidden">

@@ -112,9 +112,9 @@
                         class="h-10 w-auto object-contain sm:h-12">
                 </div>
                 <div class="min-w-0">
-                    <h1 class="truncate text-xl font-black text-white sm:text-2xl lg:text-3xl">Booth Madeena</h1>
+                    <h1 class="truncate text-xl font-black text-white sm:text-2xl lg:text-3xl">{{ $event->name }}</h1>
                     <p class="mt-0.5 text-sm font-semibold text-madeena-teal sm:text-base">
-                        Inabuyer 2026 | Live Impressions & Messages | <span
+                        Live Kesan &amp; Pesan | <span
                             class="text-white/65">{{ now()->format('H:i:s') }}</span>
                     </p>
                 </div>
@@ -174,33 +174,25 @@
     </main>
 
     <footer class="shrink-0 border-t border-white/10 bg-slate-900 px-4 py-3 sm:px-6 sm:py-4 lg:px-8">
-        <div class="mx-auto grid max-w-screen-2xl gap-3 sm:grid-cols-[auto_1fr] sm:items-center lg:grid-cols-[auto_1fr_auto]">
-            <div class="flex items-center gap-3">
-                <div class="shrink-0 rounded-lg border border-slate-200 bg-white p-2 shadow-md">
-                    <img src="{{ asset('images/' . rawurlencode('qr_Kesan dan Pesan Booth Madeena Inabuyer 2026.png')) }}"
-                        alt="QR code feedback booth Madeena Inabuyer 2026"
-                        class="h-16 w-16 object-contain sm:h-20 sm:w-20 lg:h-24 lg:w-24">
-                </div>
-
-                <div class="min-w-0">
-                    <p class="text-xs font-bold uppercase tracking-wide text-madeena-teal">Kesan dan pesan</p>
-                    <h2 class="mt-1 text-lg font-black text-white sm:text-xl lg:text-2xl">Scan untuk kirim feedback</h2>
-                    <p class="mt-1 hidden max-w-2xl text-sm leading-6 text-white/65 md:block">
-                        Bantu kami meningkatkan pengalaman Booth Madeena.
-                    </p>
-                </div>
+        <div class="mx-auto grid max-w-screen-2xl gap-3 sm:grid-cols-[1fr_auto] sm:items-center lg:grid-cols-[1fr_auto_auto]">
+            <div class="min-w-0">
+                <p class="text-xs font-bold uppercase tracking-wide text-madeena-teal">Kesan dan pesan</p>
+                <h2 class="mt-1 text-lg font-black text-white sm:text-xl lg:text-2xl">Kirim Feedback untuk {{ $event->name }}</h2>
+                <p class="mt-1 hidden max-w-2xl text-sm leading-6 text-white/65 md:block">
+                    Sampaikan kesan dan pesan Anda untuk {{ $event->name }}.
+                </p>
             </div>
 
             <div class="min-w-0 rounded-lg border border-white/10 bg-slate-950/70 px-3 py-2 sm:px-4 sm:py-3">
                 <p class="text-xs font-bold uppercase tracking-wide text-white/45">Kesan dan Pesan URL</p>
-                <a href="https://bit.ly/madeenafeedback" target="_blank" rel="noreferrer"
-                    class="mt-1 block break-all text-base font-black text-white transition hover:text-madeena-teal sm:text-lg lg:text-2xl">
-                    https://bit.ly/madeenafeedback
+                <a href="{{ $event->getFeedbackUrl() }}" target="_blank" rel="noreferrer"
+                    class="mt-1 block break-all text-sm font-black text-white transition hover:text-madeena-teal sm:text-base lg:text-lg">
+                    {{ $event->getFeedbackUrl() }}
                 </a>
             </div>
 
-            <a href="https://bit.ly/madeenafeedback" target="_blank" rel="noreferrer"
-                class="inline-flex min-h-11 items-center justify-center rounded-lg border border-madeena-teal/60 bg-madeena-teal px-4 py-2 text-sm font-black text-white shadow-lg shadow-madeena-teal/10 transition hover:bg-madeena-teal/90 focus:outline-none focus:ring-4 focus:ring-madeena-teal/25 sm:col-span-2 lg:col-span-1">
+            <a href="{{ $event->getFeedbackUrl() }}" target="_blank" rel="noreferrer"
+                class="inline-flex min-h-11 shrink-0 items-center justify-center rounded-lg border border-madeena-teal/60 bg-madeena-teal px-4 py-2 text-sm font-black text-white shadow-lg shadow-madeena-teal/10 transition hover:bg-madeena-teal/90 focus:outline-none focus:ring-4 focus:ring-madeena-teal/25 sm:col-span-2 lg:col-span-1">
                 Buka Form Feedback
             </a>
         </div>

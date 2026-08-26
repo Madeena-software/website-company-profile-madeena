@@ -7,22 +7,24 @@
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
         @if(count($banners) > 0)
             @php $hero = $banners[0]; @endphp
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h1 class="text-[6.5vw] lg:text-[3.8vw] font-extrabold text-white leading-tight mb-6 whitespace-nowrap">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                <div class="lg:col-span-7 xl:col-span-8">
+                    <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-tight mb-6 break-words">
                         {{ $hero['title'] ?? '' }}
                     </h1>
                     @if(!empty($hero['subtitle']))
                     <p class="text-xl md:text-2xl font-medium text-madeena-teal mb-6">{{ $hero['subtitle'] }}</p>
                     @endif
                     @if(!empty($hero['description']))
-                    <p class="text-white/80 text-lg leading-relaxed mb-8">{{ $hero['description'] }}</p>
+                    <div class="text-white/80 text-lg leading-relaxed mb-8 space-y-4 [&_p]:mb-3 [&_p:last-child]:mb-0 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-3 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-3 [&_li]:mb-1 [&_a]:text-madeena-teal [&_a]:underline hover:[&_a]:text-teal-300 [&_strong]:text-white [&_strong]:font-semibold">
+                        {!! \Filament\Forms\Components\RichEditor\RichContentRenderer::make($hero['description'])->toHtml() !!}
+                    </div>
                     @endif
                     @if(!empty($hero['cta_text']) && !empty($hero['cta_url']))
                     <a href="{{ $hero['cta_url'] }}" class="btn-primary text-lg">{{ $hero['cta_text'] }}</a>
                     @endif
                 </div>
-                <div class="flex justify-center lg:justify-end">
+                <div class="lg:col-span-5 xl:col-span-4 flex justify-center lg:justify-end">
                     <div class="relative">
                         <div class="absolute -inset-4 bg-madeena-teal/20 rounded-full blur-2xl"></div>
                         @if(!empty($hero['image_path']))

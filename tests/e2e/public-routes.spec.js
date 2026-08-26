@@ -9,8 +9,8 @@ test.describe('Public Front-End Routes', () => {
     await expect(page.locator('body')).toBeVisible();
   });
 
-  test('blog index should load properly', async ({ page }) => {
-    await page.goto('http://localhost:8000/blog');
+  test('artikel index should load properly', async ({ page }) => {
+    await page.goto('http://localhost:8000/artikel');
     await page.waitForLoadState('networkidle');
     
     await expect(page.locator('body')).toBeVisible();

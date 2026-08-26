@@ -114,7 +114,14 @@ class BuilderBlocks
                     ->schema([
                         TextInput::make('title')->label('Judul')->required(),
                         TextInput::make('subtitle')->label('Subjudul'),
-                        Textarea::make('description')->label('Deskripsi')->rows(3),
+                        RichEditor::make('description')
+                            ->label('Deskripsi')
+                            ->toolbarButtons([
+                                ['bold', 'italic', 'underline', 'strike', 'link'],
+                                ['bulletList', 'orderedList'],
+                                ['undo', 'redo'],
+                            ])
+                            ->columnSpanFull(),
                         FileUpload::make('image_path')->label('Gambar Banner')->image()->disk('public')->directory('banners'),
                         TextInput::make('cta_text')->label('Teks Tombol'),
                         TextInput::make('cta_url')->label('URL Tombol'),
@@ -460,7 +467,13 @@ class BuilderBlocks
                     'gradient' => 'Gradien',
                 ])->default('gradient'),
                 TextInput::make('title')->label('Judul Ajakan')->required(),
-                Textarea::make('subtitle')->label('Subjudul Deskripsi')->rows(2),
+                RichEditor::make('subtitle')
+                    ->label('Subjudul Deskripsi')
+                    ->toolbarButtons([
+                        ['bold', 'italic', 'underline', 'strike', 'link'],
+                        ['bulletList', 'orderedList'],
+                        ['undo', 'redo'],
+                    ]),
                 TextInput::make('button_text')->label('Teks Tombol')->required(),
                 TextInput::make('button_url')->label('URL Tombol')->required(),
             ]));

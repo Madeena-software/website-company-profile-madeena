@@ -19,9 +19,9 @@
             {{ $data['title'] ?? 'Siap Membangun Kemitraan?' }}
         </h2>
         @if(!empty($data['subtitle']))
-        <p class="text-lg md:text-xl {{ $isDark ? 'text-white/80' : 'text-gray-600' }} mb-10 leading-relaxed">
-            {{ $data['subtitle'] }}
-        </p>
+        <div class="text-lg md:text-xl {{ $isDark ? 'text-white/80 [&_strong]:text-white' : 'text-gray-600 [&_strong]:text-gray-900' }} mb-10 leading-relaxed space-y-4 [&_p]:mb-3 [&_p:last-child]:mb-0 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-3 [&_ul]:inline-block [&_ul]:text-left [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-3 [&_ol]:inline-block [&_ol]:text-left [&_li]:mb-1 {{ $isDark ? '[&_a]:text-madeena-teal hover:[&_a]:text-teal-300' : '[&_a]:text-madeena-blue hover:[&_a]:text-madeena-teal' }} [&_a]:underline [&_strong]:font-semibold">
+            {!! \Filament\Forms\Components\RichEditor\RichContentRenderer::make($data['subtitle'])->toHtml() !!}
+        </div>
         @endif
         @if(!empty($data['button_text']) && !empty($data['button_url']))
         <a href="{{ $data['button_url'] }}" class="inline-block bg-madeena-teal hover:bg-teal-500 text-white font-bold text-lg px-10 py-4 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300">

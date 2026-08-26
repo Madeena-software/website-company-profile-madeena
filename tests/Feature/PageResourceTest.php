@@ -35,9 +35,17 @@ class PageResourceTest extends TestCase
         $page = Page::create([
             'title' => 'Test Page',
             'slug' => 'test-page',
-            'content_json' => []
+            'content_json' => [],
+            'is_published' => false,
         ]);
 
         $this->actingAs($this->admin)->get(PageResource::getUrl('edit', ['record' => $page]))->assertSuccessful();
+    }
+
+    public function test_non_admin_cannot_access_page_resource()
+    {
+        $regularUser = User::factory()->create(['role' => 'user']);
+        $this->actingAs($regularUser)->get(PageResource::getUrl('index'))->assertForbidden();
+        $this->actingAs($regularUser)->get(PageResource::getUrl('create'))->assertForbidden();
     }
 }
